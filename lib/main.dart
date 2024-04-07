@@ -17,11 +17,14 @@ import "provider_todo_app/ui/provider_todo_app_main_page.dart";
 }*/
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (context) => TodoProvider(),child: MaterialApp(
-    theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepOrange,
-            brightness: Brightness.dark)),
-    home: TodoProviderApp(),
-  ),));
+  runApp(ChangeNotifierProvider(
+    create: (context) => TodoProviderClass(),
+    child: MaterialApp(
+      theme: ThemeData.from(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.deepOrange,
+              brightness: Brightness.dark)),
+      home: TodoProviderApp(),
+    ),
+  ));
 }
