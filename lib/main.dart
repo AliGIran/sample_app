@@ -7,16 +7,19 @@ import "bloc_todo_app/bloc/todo_bloc/todo_bloc.dart";
 import "bloc_todo_app/ui/bloc_todo_app_main_page.dart";
 import "provider_todo_app/ui/provider_todo_app_main_page.dart";
 
-/*void main(){
+void main() {
   runApp(BlocProvider<TodoBloc>(
     create: (context) => TodoBloc(),
     child: MaterialApp(
-      theme: ThemeData.dark(),
-      home: BlocTodoApp(),),
+      theme: ThemeData.from(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.pinkAccent)),
+      home: BlocTodoApp(),
+    ),
   ));
-}*/
+}
 
-void main() {
+/* void main() {
   runApp(ChangeNotifierProvider(
     create: (context) => TodoProviderClass(),
     child: MaterialApp(
@@ -27,4 +30,4 @@ void main() {
       home: TodoProviderApp(),
     ),
   ));
-}
+}*/

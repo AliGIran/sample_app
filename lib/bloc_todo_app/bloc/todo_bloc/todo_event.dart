@@ -3,17 +3,21 @@ part of 'todo_bloc.dart';
 @immutable
 sealed class TodoEvent {}
 
-// class Increment extends TodoEvent {}
+class AddNewTodoToList extends TodoEvent {
+  String newTodo;
 
-class AddNewTodo extends TodoEvent{
-  final String newTodo;
-
-  AddNewTodo(this.newTodo);
+  AddNewTodoToList(this.newTodo);
 }
 
-
-class RemoveTodoFromList extends TodoEvent{
-  final int index;
+class RemoveTodoFromList extends TodoEvent {
+  int index;
 
   RemoveTodoFromList(this.index);
+}
+
+class UpdateTodoOfList extends TodoEvent {
+  int index;
+  String editedValue;
+
+  UpdateTodoOfList(this.index, this.editedValue);
 }

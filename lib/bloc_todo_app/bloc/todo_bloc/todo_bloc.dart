@@ -1,10 +1,5 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
-import 'package:flutter/gestures.dart';
 import 'package:meta/meta.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'todo_event.dart';
 
@@ -13,34 +8,36 @@ part 'todo_state.dart';
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   TodoBloc() : super(TodoInitial(const [])) {
     on<TodoEvent>((TodoEvent event, Emitter<TodoState> emitter) {
-      // TODO: implement event handler
+      if (event is AddNewTodoToList) {
+        String tempValue = event.newTodo;
+        List tempTodoList = [
+          ...state.todoList!.toList()
+        ]; // Copy todoList into tempTodoLIst
 
-      List tempTodoList;
-      String tempNewTodo;
-      int tempIndex;
-
-      if (event is AddNewTodo) {
-        tempNewTodo = event.newTodo.toString();
-        print(tempNewTodo);
-
-        tempTodoList = [...state.todoList!.toList()];
-        print(tempTodoList.toString());
-
-        tempTodoList.add(tempNewTodo);
-        print(tempTodoList.toString());
+        tempTodoList.add(tempValue); //Add item to the list
 
         emit(TodoInitial(state.todoList = tempTodoList));
+      } else {
+        if (event is RemoveTodoFromList) {
+          int index = event.index;
+          List tempTodoList = [
+            ...state.todoList!.toList()
+          ]; // Copy todoList into tempTodoLIst
 
-        // emit(TodoInitial((state.counter! + 1)));
-      } else if (event is RemoveTodoFromList) {
-        tempIndex = event.index;
+          tempTodoList.removeAt(index); // Remove item from the list
 
-        tempTodoList = [...state.todoList!.toList()];
-        print(tempTodoList.toString());
+          emit(TodoInitial(state.todoList = tempTodoList));
+        } else if (event is UpdateTodoOfList) {
+          int index = event.index;
+          String newValue = event.editedValue;
+          List tempTodoList = [
+            ...state.todoList!.toList()
+          ]; //Copy todoList into tempTodoLIst
 
-        tempTodoList.removeAt(tempIndex);
+          tempTodoList[index] = newValue; // Update item in the list
 
-        emit(TodoInitial(state.todoList = tempTodoList));
+          emit(TodoInitial(state.todoList = tempTodoList));
+        }
       }
     });
   }
